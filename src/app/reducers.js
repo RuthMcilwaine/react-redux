@@ -3,13 +3,10 @@ import {
   REMOVE_TODO,
   COMPLETED_TODO,
 } from "../components/actionTypes.js";
+import todos from "../data/loadTodos.json";
 
 const initialState = {
-  todos: [
-    { id: 1, text: "Buy groceries" },
-    { id: 2, text: "Do laundry" },
-    { id: 3, text: "Walk the dog" },
-  ],
+  todos: todos,
 };
 
 export const todosReducer = (state = initialState, action) => {
