@@ -2,11 +2,15 @@ import {
   CREATE_TODO,
   REMOVE_TODO,
   COMPLETED_TODO,
+  FETCH_TODOS_REQUEST,
+  FETCH_TODOS_SUCCESS,
+  FETCH_TODOS_FAILURE,
 } from "../components/actionTypes.js";
 import todos from "../data/loadTodos.json";
 
 const initialState = {
   todos: todos,
+  loading: false,
 };
 
 export const todosReducer = (state = initialState, action) => {
@@ -34,6 +38,13 @@ export const todosReducer = (state = initialState, action) => {
         return todo;
       });
     }
+    case FETCH_TODOS_REQUEST: {
+      return { ...state, loading: true };
+    }
+    case FETCH_TODOS_SUCCESS:
+      return { ...state, todos: payload, loading: false };
+    case FETCH_TODOS_FAILURE:
+      return { ...state, loading: false };
     default:
       return state;
   }

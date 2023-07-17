@@ -1,27 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 
-const TodoItem = ({ todo, onRemoveTodo }) => {
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
-
-  const todoStyle = {
-    textDecoration: isChecked ? "line-through" : "none",
-  };
-
+const TodoItem = ({ todo, onRemoveTodo, onCompleted }) => {
   return (
     <div className="todo-item-container">
-      <h3 style={todoStyle}>{todo.text}</h3>
-      <input
-        type="checkbox"
-        checked={isChecked}
-        onChange={handleCheckboxChange}
-      />
-      <button onClick={() => onRemoveTodo(todo.text)} className="remove-button">
-        Remove
-      </button>
+      <h3>{todo.text}</h3>
+      <div className="buttons-container">
+        <button
+          onClick={() => onCompleted(todo.text)}
+          className="remove-button"
+        >
+          Completed
+        </button>
+        <button
+          onClick={() => onRemoveTodo(todo.text)}
+          className="remove-button"
+        >
+          Remove
+        </button>
+      </div>
     </div>
   );
 };
