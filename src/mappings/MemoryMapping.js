@@ -1,17 +1,12 @@
-import {
-    LOAD_TODOS,
-  } from '../Intents';
+import { FETCH_TODOS_SUCCESS } from "./actionTypes";
+import loadTodosResponse from "./data/loadTodosResponse.json";
 
-  import loadTodosResponse from './data/loadTodosResponse.json';
+const loadTodos = ({ onSuccess }) => {
+  onSuccess(loadTodosResponse);
+};
 
-  const loadTodos = ({ onSuccess }) => {
-    onSuccess(loadTodosResponse);
-  };
+const MemoryMapping = {
+  [FETCH_TODOS_SUCCESS]: loadTodos,
+};
 
-  const MemoryInventoryMapping = {
-
-    [LOAD_TODOS]: loadTodos,
-
-  };
-  
-  export default MemoryInventoryMapping;
+export default MemoryMapping;

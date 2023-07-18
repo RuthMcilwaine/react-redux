@@ -1,4 +1,3 @@
-//import { increment, incrementAsync, incrementIfOdd } from "./components/thunks";
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
@@ -10,7 +9,3 @@ createRoot(document.getElementById("root")).render(
     <App />
   </Provider>
 );
-
-// store.dispatch(increment());
-// store.dispatch(incrementAsync());
-// store.dispatch(incrementIfOdd());
