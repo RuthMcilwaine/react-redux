@@ -23,13 +23,12 @@ export const fetchTodosSuccess = (text) => ({
 });
 
 export const FETCH_TODOS_FAILURE = "FETCH_TODOS_FAILURE";
-export const fetchTodosFailure = (text) => ({
+export const fetchTodosFailure = (error) => ({
   type: FETCH_TODOS_FAILURE,
-  payload: { text },
+  payload: error,
 });
 
 export const FETCH_TODOS_REQUEST = "FETCH_TODOS_REQUEST";
-export const fetchTodosRequest = (text) => ({
+export const fetchTodosRequest = () => ({
   type: FETCH_TODOS_REQUEST,
-  payload: { text },
 });
