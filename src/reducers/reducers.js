@@ -6,7 +6,7 @@ import {
   FETCH_TODOS_SUCCESS,
   FETCH_TODOS_FAILURE,
 } from "../components/actionTypes.js";
-import todos from "../data/loadTodos.json";
+import todos from "../mappings/data/loadTodosResponse.json";
 
 const initialState = {
   todos: todos,

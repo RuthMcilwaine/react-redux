@@ -3,7 +3,7 @@ import {
   FETCH_TODOS_SUCCESS,
   FETCH_TODOS_FAILURE,
 } from "./actionTypes";
-import todosData from "../data/loadTodos.json";
+import todosData from "../mappings/data/loadTodosResponse.json";
 
 export const fetchTodos = () => async (dispatch) => {
   dispatch(fetchTodosRequest());
