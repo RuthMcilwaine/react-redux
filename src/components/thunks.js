@@ -3,7 +3,7 @@ import {
   FETCH_TODOS_SUCCESS,
   FETCH_TODOS_FAILURE,
 } from "./actionTypes";
-import todosData from "../mappings/data/loadTodosResponse.json";
+import todosResponse from "../mappings/data/loadTodosResponse.json";
 
 export const fetchTodos = () => async (dispatch) => {
   dispatch(fetchTodosRequest());
@@ -11,7 +11,7 @@ export const fetchTodos = () => async (dispatch) => {
   try {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    dispatch(fetchTodosSuccess(todosData));
+    dispatch(fetchTodosSuccess(todosResponse));
   } catch (error) {
     dispatch(fetchTodosFailure(error));
   }

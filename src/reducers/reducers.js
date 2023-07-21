@@ -6,12 +6,12 @@ import {
   FETCH_TODOS_SUCCESS,
   FETCH_TODOS_FAILURE,
 } from "../components/actionTypes.js";
-import todos from "../mappings/data/loadTodosResponse.json";
+import todosResponse from "../mappings/data/loadTodosResponse.json";
 
 const initialState = {
-  todos: todos,
   loading: false,
 };
+console.log(todosResponse.todos);
 
 export const todosReducer = (state = initialState, action) => {
   const { type, payload } = action;
@@ -23,11 +23,17 @@ export const todosReducer = (state = initialState, action) => {
         text,
         isCompleted: false,
       };
-      return state.concat(newTodo);
+      return {
+        ...state,
+        todos: [...state.todos, newTodo],
+      };
     }
     case REMOVE_TODO: {
       const { text } = payload;
-      return state.filter((todo) => todo.text !== text);
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.text !== text),
+      };
     }
     case COMPLETED_TODO: {
       const { text } = payload;
@@ -39,13 +45,21 @@ export const todosReducer = (state = initialState, action) => {
       });
     }
     case FETCH_TODOS_REQUEST: {
-      return { ...state, loading: true };
+      console.log("fetch ", state);
+      const x = { ...state, loading: true };
+      console.log(x);
+      return x;
     }
     case FETCH_TODOS_SUCCESS:
-      return { ...state, todos: payload, loading: false };
+      console.log("payload", payload);
+      const x = { ...state, todos: payload.todos, loading: false };
+      console.log("fetch_success", x);
+      return x;
     case FETCH_TODOS_FAILURE:
       return { ...state, loading: false };
     default:
       return state;
   }
 };
+
+export default todosReducer;

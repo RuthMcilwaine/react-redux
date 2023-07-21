@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { todosReducer } from "../reducers/reducers.js";
+import todosReducer from "../reducers/reducers.js";
 import { fetchTodos } from "../components/thunks.js";
 import thunk from "redux-thunk";
 
