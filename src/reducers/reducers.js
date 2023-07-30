@@ -6,11 +6,11 @@ import {
   FETCH_TODOS_SUCCESS,
   FETCH_TODOS_FAILURE,
 } from "../components/actionTypes.js";
-import todos from "../mappings/data/loadTodosResponse.json";
+import todosResponse from "../mappings/data/loadTodosResponse.json";
 
 const initialState = {
-  todos: todos,
   loading: false,
+  todos: todosResponse.todos || [],
 };
 
 export const todosReducer = (state = initialState, action) => {
@@ -23,15 +23,21 @@ export const todosReducer = (state = initialState, action) => {
         text,
         isCompleted: false,
       };
-      return state.concat(newTodo);
+      return {
+        ...state,
+        todos: [...state.todos, newTodo],
+      };
     }
     case REMOVE_TODO: {
       const { text } = payload;
-      return state.filter((todo) => todo.text !== text);
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.text !== text),
+      };
     }
     case COMPLETED_TODO: {
       const { text } = payload;
-      return state.map((todo) => {
+      return state.todos.map((todo) => {
         if (todo.text === text) {
           return { ...todo, isCompleted: true };
         }
@@ -49,3 +55,5 @@ export const todosReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+//export default todosReducer;//
