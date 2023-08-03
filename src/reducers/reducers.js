@@ -2,25 +2,28 @@ import {
   CREATE_TODO,
   REMOVE_TODO,
   COMPLETED_TODO,
+} from "../components/actionTypes.js";
+import {
   FETCH_TODOS_REQUEST,
   FETCH_TODOS_SUCCESS,
   FETCH_TODOS_FAILURE,
-} from "../components/actionTypes.js";
+} from "../components/thunks.js";
+import { v4 as uuidv4 } from "uuid";
 import todosResponse from "../mappings/data/loadTodosResponse.json";
 
 const initialState = {
   loading: false,
-  todos: todosResponse.todos || [],
+  todos: todosResponse.todos,
 };
 
+console.log("Initial state:", initialState);
 export const todosReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
     case CREATE_TODO: {
-      const { text } = payload;
       const newTodo = {
-        text,
+        id: uuidv4(),
         isCompleted: false,
       };
       return {
@@ -37,18 +40,22 @@ export const todosReducer = (state = initialState, action) => {
     }
     case COMPLETED_TODO: {
       const { text } = payload;
-      return state.todos.map((todo) => {
-        if (todo.text === text) {
-          return { ...todo, isCompleted: true };
-        }
-        return todo;
-      });
+      return {
+        ...state,
+        todos: state.todos.map((todo) => {
+          if (todo.text === text) {
+            return { ...todo, isCompleted: true };
+          }
+          return todo;
+        }),
+      };
     }
+
     case FETCH_TODOS_REQUEST: {
       return { ...state, loading: true };
     }
     case FETCH_TODOS_SUCCESS:
-      return { ...state, todos: payload, loading: false };
+      return { ...state, todos: payload.todos, loading: false };
     case FETCH_TODOS_FAILURE:
       return { ...state, loading: false };
     default:
@@ -56,4 +63,4 @@ export const todosReducer = (state = initialState, action) => {
   }
 };
 
-//export default todosReducer;//
+export default todosReducer;
