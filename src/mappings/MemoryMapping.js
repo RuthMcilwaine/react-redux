@@ -1,4 +1,4 @@
-import { FETCH_TODOS_SUCCESS } from "./actionTypes";
+import { FETCH_TODOS_SUCCESS } from "../components/thunks";
 import loadTodosResponse from "./data/loadTodosResponse.json";
 
 const loadTodos = ({ onSuccess }) => {

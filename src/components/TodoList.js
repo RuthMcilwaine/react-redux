@@ -14,7 +14,7 @@ const TodoList = ({
   useEffect(() => {
     fetchTodos(); // Dispatch fetchTodos() when the component mounts
   }, [fetchTodos]);
-  console.log(todos);
+
   return (
     <div className="list-wrapper">
       {loading ? (
