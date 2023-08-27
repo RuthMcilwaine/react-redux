@@ -10,11 +10,10 @@ import {
 } from "../components/thunks.js";
 import { v4 as uuidv4 } from "uuid";
 import todosResponse from "../mappings/data/loadTodosResponse.json";
-const config = require("../config.js");
 
-const initialState = {
+export const initialState = {
   loading: false,
-  todos: config.isTest ? [] : todosResponse.todos,
+  todos: todosResponse.todos,
 };
 
 export const todosReducer = (state = initialState, action) => {
