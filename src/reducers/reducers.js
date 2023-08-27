@@ -10,13 +10,13 @@ import {
 } from "../components/thunks.js";
 import { v4 as uuidv4 } from "uuid";
 import todosResponse from "../mappings/data/loadTodosResponse.json";
+const config = require("../config.js");
 
 const initialState = {
   loading: false,
-  todos: todosResponse.todos,
+  todos: config.isTest ? [] : todosResponse.todos,
 };
 
-console.log("Initial state:", initialState);
 export const todosReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
