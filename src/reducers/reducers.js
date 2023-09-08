@@ -2,16 +2,14 @@ import {
   CREATE_TODO,
   REMOVE_TODO,
   COMPLETED_TODO,
-} from "../components/actionTypes.js";
-import {
   FETCH_TODOS_REQUEST,
   FETCH_TODOS_SUCCESS,
   FETCH_TODOS_FAILURE,
-} from "../components/thunks.js";
+} from "../components/actionTypes.js";
 import { v4 as uuidv4 } from "uuid";
 import todosResponse from "../mappings/data/loadTodosResponse.json";
 
-export const initialState = {
+const initialState = {
   loading: false,
   todos: todosResponse.todos,
 };

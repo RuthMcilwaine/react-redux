@@ -1,6 +1,8 @@
 import {
   COMPLETED_TODO,
   CREATE_TODO,
+  // FETCH_TODOS_REQUEST,
+  FETCH_TODOS_SUCCESS,
   REMOVE_TODO,
 } from "../../components/actionTypes";
 import todosReducer from "../reducers";
@@ -58,6 +60,36 @@ describe("todosReducer", () => {
       );
       console.log(completedTodo);
       expect(completedTodo.isCompleted).toBe(true);
+    });
+  });
+});
+
+describe("FETCH_TODOS_SUCCESS", () => {
+  it("should update state with todo list when FETCH_TODOS_SUCCESS action is dispatched", () => {
+    const state = {
+      loading: true,
+      todos: [
+        { id: 1, text: "Buy groceries", isCompleted: false },
+        { id: 2, text: "Do laundry", isCompleted: false },
+        { id: 3, text: "Walk the dog", isCompleted: false },
+      ],
+    };
+
+    const successAction = {
+      type: FETCH_TODOS_SUCCESS,
+      payload: {
+        todos: [{ id: 4, text: "Shopping", isCompleted: false }],
+      },
+    };
+
+    const newState = todosReducer(state, successAction);
+
+    console.log(successAction.payload.todos);
+    console.log(newState);
+
+    expect(newState).toEqual({
+      loading: false,
+      todos: successAction.payload.todos,
     });
   });
 });
