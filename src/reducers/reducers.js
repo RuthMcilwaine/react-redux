@@ -12,6 +12,7 @@ import todosResponse from "../mappings/data/loadTodosResponse.json";
 const initialState = {
   loading: false,
   todos: todosResponse.todos,
+  error: null,
 };
 
 export const todosReducer = (state = initialState, action) => {
@@ -48,13 +49,12 @@ export const todosReducer = (state = initialState, action) => {
       };
     }
 
-    case FETCH_TODOS_REQUEST: {
+    case FETCH_TODOS_REQUEST:
       return { ...state, loading: true };
-    }
     case FETCH_TODOS_SUCCESS:
       return { ...state, todos: payload.todos, loading: false };
     case FETCH_TODOS_FAILURE:
-      return { ...state, loading: false };
+      return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }

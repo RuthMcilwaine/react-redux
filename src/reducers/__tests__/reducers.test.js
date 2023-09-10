@@ -1,6 +1,7 @@
 import {
   COMPLETED_TODO,
   CREATE_TODO,
+  FETCH_TODOS_FAILURE,
   // FETCH_TODOS_REQUEST,
   FETCH_TODOS_SUCCESS,
   REMOVE_TODO,
@@ -68,28 +69,48 @@ describe("FETCH_TODOS_SUCCESS", () => {
   it("should update state with todo list when FETCH_TODOS_SUCCESS action is dispatched", () => {
     const state = {
       loading: true,
-      todos: [
-        { id: 1, text: "Buy groceries", isCompleted: false },
-        { id: 2, text: "Do laundry", isCompleted: false },
-        { id: 3, text: "Walk the dog", isCompleted: false },
-      ],
+      todos: [],
     };
 
     const successAction = {
       type: FETCH_TODOS_SUCCESS,
       payload: {
-        todos: [{ id: 4, text: "Shopping", isCompleted: false }],
+        todos: [
+          { id: 1, text: "Buy groceries", isCompleted: false },
+          { id: 2, text: "Do laundry", isCompleted: false },
+          { id: 3, text: "Walk the dog", isCompleted: false },
+        ],
       },
     };
 
     const newState = todosReducer(state, successAction);
-
-    console.log(successAction.payload.todos);
     console.log(newState);
 
     expect(newState).toEqual({
       loading: false,
       todos: successAction.payload.todos,
     });
+  });
+});
+
+describe("FETCH_TODOS_FAILURE", () => {
+  it("should return error when FETCH_TODOS_FAILURE action is dispatched", () => {
+    const state = {
+      loading: true,
+      todos: [],
+      error: null,
+    };
+
+    const error = "An error occurred";
+
+    const failureAction = {
+      type: FETCH_TODOS_FAILURE,
+      payload: error,
+    };
+
+    const newState = todosReducer(state, failureAction);
+    console.log(newState);
+
+    expect(newState.error).toEqual(error);
   });
 });
