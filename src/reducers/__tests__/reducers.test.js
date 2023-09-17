@@ -83,13 +83,18 @@ describe("FETCH_TODOS_SUCCESS", () => {
       },
     };
 
+    const expectedState = {
+      loading: false,
+      todos: [
+        { id: 1, text: "Buy groceries", isCompleted: false },
+        { id: 2, text: "Do laundry", isCompleted: false },
+        { id: 3, text: "Walk the dog", isCompleted: false },
+      ],
+    };
     const newState = todosReducer(state, successAction);
     console.log(newState);
 
-    expect(newState).toEqual({
-      loading: false,
-      todos: successAction.payload.todos,
-    });
+    expect(newState).toEqual({ expectedState });
   });
 });
 
