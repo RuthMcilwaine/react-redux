@@ -9,8 +9,9 @@ export const fetchTodos = () => async (dispatch) => {
   dispatch(fetchTodosRequest());
 
   try {
-    const todosResponse = await fetch("http://localhost:5000/todos");
-    dispatch(fetchTodosSuccess(todosResponse));
+    const response = await fetch("http://localhost:5000/todos");
+    const data = await response.json();
+    dispatch(fetchTodosSuccess(data));
   } catch (error) {
     dispatch(fetchTodosFailure(error));
   }
