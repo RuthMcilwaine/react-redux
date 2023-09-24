@@ -3,25 +3,10 @@ import { shallow } from "enzyme";
 import TodoItem from "../TodoItem";
 
 describe("<TodoItem />", () => {
-  it("simulates a click event for 'Completed' button", () => {
-    const onCompleted = jest.fn();
-    const onRemoveTodo = jest.fn();
-    const todo = { text: "Sample Todo" };
-    const wrapper = shallow(
-      <TodoItem
-        todo={todo}
-        onCompleted={onCompleted}
-        onRemoveTodo={onRemoveTodo}
-      />
-    );
-    wrapper.find("button").at(0).simulate("click");
-    expect(onCompleted).toHaveBeenCalledWith(todo.text);
-  });
-
   it("renders without errors", () => {
     const onCompleted = jest.fn();
     const onRemoveTodo = jest.fn();
-    const todo = { text: "Sample Todo" };
+    const todo = { text: "Buy groceries" };
     const wrapper = shallow(
       <TodoItem
         todo={todo}
@@ -30,5 +15,23 @@ describe("<TodoItem />", () => {
       />
     );
     expect(wrapper.exists()).toBe(true);
+  });
+
+  it("simulates a click event for 'Completed' button", () => {
+    const onCompleted = jest.fn();
+    const todo = { text: "Buy groceries" };
+    const wrapper = shallow(<TodoItem todo={todo} onCompleted={onCompleted} />);
+    wrapper.find("button").at(0).simulate("click");
+    expect(onCompleted).toHaveBeenCalledWith(todo.text);
+  });
+
+  it("simulates a click event for 'Remove' button", () => {
+    const todo = { text: "Buy groceries" };
+    const onRemoveTodo = jest.fn();
+    const wrapper = shallow(
+      <TodoItem todo={todo} onRemoveTodo={onRemoveTodo} />
+    );
+    wrapper.find("button").at(1).simulate("click");
+    expect(onRemoveTodo).toHaveBeenCalledWith(todo.text);
   });
 });
