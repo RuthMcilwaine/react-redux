@@ -32,3 +32,18 @@ export const FETCH_TODOS_REQUEST = "FETCH_TODOS_REQUEST";
 export const fetchTodosRequest = () => ({
   type: FETCH_TODOS_REQUEST,
 });
+
+export const FETCH_TODOS_BY_ID_REQUEST = "FETCH_TODOS_BY_ID_REQUEST";
+export const fetchTodosByIdRequest = () => ({
+  type: FETCH_TODOS_BY_ID_REQUEST,
+});
+
+export const FETCH_TODOS_BY_ID_SUCCESS = "FETCH_TODOS_BY_ID_SUCCESS";
+export const fetchTodosByIdSuccess = () => ({
+  type: FETCH_TODOS_BY_ID_SUCCESS,
+});
+
+export const FETCH_TODOS_BY_ID_FAILURE = "FETCH_TODOS_BY_ID_FAILURE";
+export const fetchTodosByIdFailure = () => ({
+  type: FETCH_TODOS_BY_ID_FAILURE,
+});
