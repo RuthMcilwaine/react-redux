@@ -1,12 +1,22 @@
 import { configureStore } from "@reduxjs/toolkit";
-import todosReducer from "../reducers/reducers.js";
+import { combineReducers } from "@reduxjs/toolkit";
+import {
+  todosReducer,
+  fetchTodosByIdReducer,
+  fetchTodosReducer,
+} from "../reducers/reducers.js";
 import thunkMiddleware from "redux-thunk";
 
+const rootReducer = combineReducers({
+  todosReducer: todosReducer,
+  fetchTodos: fetchTodosReducer,
+  fetchTodosById: fetchTodosByIdReducer,
+});
 const middleware = [thunkMiddleware];
 
 const store = configureStore({
-  reducer: todosReducer,
-  middleware: middleware,
+  rootReducer,
+  middleware,
 });
 
 export default store;

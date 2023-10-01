@@ -6,7 +6,7 @@ import {
   FETCH_TODOS_SUCCESS,
   REMOVE_TODO,
 } from "../../components/actionTypes";
-import todosReducer from "../reducers";
+import { todosReducer, fetchTodosReducer } from "../reducers";
 
 describe("todosReducer", () => {
   describe("CREATE_TODO", () => {
@@ -91,10 +91,11 @@ describe("FETCH_TODOS_SUCCESS", () => {
         { id: 3, text: "Walk the dog", isCompleted: false },
       ],
     };
-    const newState = todosReducer(state, successAction);
+    const newState = fetchTodosReducer(state, successAction);
     console.log(newState);
+    console.log(expectedState);
 
-    expect(newState).toEqual({ expectedState });
+    expect(newState).toEqual(expectedState);
   });
 });
 
@@ -113,7 +114,7 @@ describe("FETCH_TODOS_FAILURE", () => {
       payload: error,
     };
 
-    const newState = todosReducer(state, failureAction);
+    const newState = fetchTodosReducer(state, failureAction);
     console.log(newState);
 
     expect(newState.error).toEqual(error);

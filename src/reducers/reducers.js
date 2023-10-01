@@ -5,13 +5,16 @@ import {
   FETCH_TODOS_REQUEST,
   FETCH_TODOS_SUCCESS,
   FETCH_TODOS_FAILURE,
+  FETCH_TODOS_BY_ID_REQUEST,
+  FETCH_TODOS_BY_ID_SUCCESS,
+  FETCH_TODOS_BY_ID_FAILURE,
 } from "../components/actionTypes.js";
 import { v4 as uuidv4 } from "uuid";
-import todosResponse from "../mappings/data/loadTodosResponse.json";
+//import todosResponse from "../mappings/data/loadTodosResponse.json";
 
 const initialState = {
   loading: false,
-  todos: todosResponse.todos,
+  todos: null,
   error: null,
 };
 
@@ -48,7 +51,15 @@ export const todosReducer = (state = initialState, action) => {
         }),
       };
     }
+    default:
+      return state;
+  }
+};
 
+export const fetchTodosReducer = (state = initialState, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
     case FETCH_TODOS_REQUEST:
       return { ...state, loading: true };
     case FETCH_TODOS_SUCCESS:
@@ -60,4 +71,17 @@ export const todosReducer = (state = initialState, action) => {
   }
 };
 
-export default todosReducer;
+export const fetchTodosByIdReducer = (state = initialState, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case FETCH_TODOS_BY_ID_REQUEST:
+      return { ...state, loading: true };
+    case FETCH_TODOS_BY_ID_SUCCESS:
+      return { ...state, todos: payload.todo.id, loading: false };
+    case FETCH_TODOS_BY_ID_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
